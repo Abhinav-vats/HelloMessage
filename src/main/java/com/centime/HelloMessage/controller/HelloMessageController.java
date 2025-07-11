@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/concatenator")
+@RequestMapping("/message")
 @Slf4j
 public class HelloMessageController {
 
@@ -17,8 +17,8 @@ public class HelloMessageController {
         return "UP";
     }
 
-    @GetMapping(value = "/hello", consumes = "application/json")
-    public String helloMessage(@RequestBody DetailVo detailVo){
+    @GetMapping
+    public String helloMessage(){
 
         log.info("Entered: helloMessage|"+getClass().getName());
         log.info("Exited: helloMessage|"+getClass().getName());
