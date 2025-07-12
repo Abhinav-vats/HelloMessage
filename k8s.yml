@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-message
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-message
+  template:
+    metadata:
+      labels:
+        app: hello-message
+    spec:
+      containers:
+        - name: hello-message
+          image: 686754180139.dkr.ecr.ap-south-1.amazonaws.com/centime/hello-message:latest  # Updated line
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-message-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: hello-message
+  ports:
+    - protocol: TCP
+      port: 80              # The port that the service will expose externally
+      targetPort: 8080      # The port on which the Flask app is running inside the container
